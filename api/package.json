@@ -1,0 +1,30 @@
+{
+  "name": "fullstack-challenge-api",
+  "version": "1.0.0",
+  "description": "API REST para procesar archivos CSV del API externa",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "mocha test/**/*.test.js --timeout 10000"
+  },
+  "keywords": [
+    "api",
+    "express",
+    "csv"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^11.7.4",
+    "nodemon": "^3.1.10"
+  },
+  "engines": {
+    "node": "14.x"
+  }
+}
