@@ -1,7 +1,7 @@
-import React from 'react';
-import { Navbar, Container, Badge } from 'react-bootstrap';
-import Icon from './ui/Icon';
-import './Header.css';
+import React from "react";
+import { Badge, Container, Navbar } from "react-bootstrap";
+import "./Header.css";
+import Icon from "./ui/Icon";
 
 const Header = () => {
   return (
@@ -12,7 +12,9 @@ const Header = () => {
             <Icon name="logo" size={32} color="white" />
           </div>
           <div>
-            <div className="brand-title">CSV Data Viewer</div>
+            <div className="brand-title">
+              Toolbox challenge - CSV Data Viewer
+            </div>
             <div className="brand-subtitle">React + Redux</div>
           </div>
         </Navbar.Brand>
