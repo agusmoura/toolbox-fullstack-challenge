@@ -7,7 +7,7 @@ COPY frontend/package*.json ./frontend/
 WORKDIR /app/frontend
 RUN npm ci
 COPY frontend/ .
-RUN npm run build
+RUN NODE_ENV=production npm run build
 
 # Install backend deps
 WORKDIR /app/api
