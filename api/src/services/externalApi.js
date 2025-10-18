@@ -1,12 +1,12 @@
 const https = require('https');
 const http = require('http');
-
-const REQUEST_TIMEOUT = 30000;
+const config = require('../config/environment');
+const { HTTP_STATUS_RANGES, ERROR_MESSAGES } = require('../config/constants');
 
 const makeRequest = (url, headers = {}) => {
   return new Promise((resolve, reject) => {
     const client = url.startsWith('https') ? https : http;
-    const options = { headers, timeout: REQUEST_TIMEOUT };
+    const options = { headers, timeout: config.externalApi.timeout };
 
     const req = client.get(url, options, (res) => {
       let data = '';
@@ -14,7 +14,8 @@ const makeRequest = (url, headers = {}) => {
       res.on('data', (chunk) => { data += chunk; });
 
       res.on('end', () => {
-        if (res.statusCode >= 200 && res.statusCode < 300) {
+        if (res.statusCode >= HTTP_STATUS_RANGES.SUCCESS_MIN &&
+            res.statusCode <= HTTP_STATUS_RANGES.SUCCESS_MAX) {
           resolve(data);
         } else {
           reject(new Error(`HTTP ${res.statusCode}: ${data}`));
@@ -25,14 +26,14 @@ const makeRequest = (url, headers = {}) => {
     req.on('error', reject);
     req.on('timeout', () => {
       req.destroy();
-      reject(new Error('Request timeout'));
+      reject(new Error(ERROR_MESSAGES.REQUEST_TIMEOUT));
     });
   });
 };
 
 const getFilesList = async (baseUrl, apiKey) => {
   const response = await makeRequest(
-    `${baseUrl}/v1/secret/files`,
+    `${baseUrl}${config.externalApi.endpoints.filesList}`,
     { Authorization: apiKey }
   );
   const { files = [] } = JSON.parse(response);
@@ -42,7 +43,7 @@ const getFilesList = async (baseUrl, apiKey) => {
 const downloadFile = async (baseUrl, apiKey, filename) => {
   try {
     return await makeRequest(
-      `${baseUrl}/v1/secret/file/${filename}`,
+      `${baseUrl}${config.externalApi.endpoints.fileDownload}/${filename}`,
       { Authorization: apiKey }
     );
   } catch (error) {

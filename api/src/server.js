@@ -1,5 +1,6 @@
 const express = require('express');
 const filesRouter = require('./routes/files');
+const { HTTP_STATUS, ERROR_MESSAGES, API_INFO } = require('./config/constants');
 
 const createServer = () => {
   const app = express();
@@ -16,29 +17,26 @@ const createServer = () => {
 
   app.get('/', (req, res) => {
     res.json({
-      message: 'Toolbox Fullstack Challenge API',
-      status: 'running',
-      endpoints: {
-        files_data: '/files/data',
-        files_list: '/files/list'
-      }
+      message: API_INFO.NAME,
+      status: API_INFO.STATUS,
+      endpoints: API_INFO.ENDPOINTS
     });
   });
 
   app.use('/files', filesRouter);
 
   app.use((req, res) => {
-    res.status(404).json({
-      error: 'Not Found',
-      message: `Route ${req.method} ${req.path} not found`
+    res.status(HTTP_STATUS.NOT_FOUND).json({
+      error: ERROR_MESSAGES.NOT_FOUND,
+      message: `${ERROR_MESSAGES.ROUTE_NOT_FOUND}: ${req.method} ${req.path}`
     });
   });
 
   app.use((err, req, res, next) => {
     console.error('Unhandled error:', err);
-    res.status(500).json({
-      error: 'Internal Server Error',
-      message: err.message || 'An unexpected error occurred'
+    res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+      error: ERROR_MESSAGES.INTERNAL_ERROR,
+      message: err.message || ERROR_MESSAGES.UNEXPECTED_ERROR
     });
   });
 

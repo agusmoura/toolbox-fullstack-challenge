@@ -1,16 +1,17 @@
 require('dotenv').config();
 
 const createServer = require('./server');
+const config = require('./config/environment');
+const { API_INFO } = require('./config/constants');
 
-const PORT = process.env.PORT || 3000;
 const app = createServer();
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`API available at http://localhost:${PORT}`);
+app.listen(config.port, () => {
+  console.log(`Server running on port ${config.port}`);
+  console.log(`API available at http://localhost:${config.port}`);
   console.log(`Endpoints:`);
-  console.log(`  GET http://localhost:${PORT}/files/data`);
-  console.log(`  GET http://localhost:${PORT}/files/list`);
+  console.log(`  GET http://localhost:${config.port}${API_INFO.ENDPOINTS.FILES_DATA}`);
+  console.log(`  GET http://localhost:${config.port}${API_INFO.ENDPOINTS.FILES_LIST}`);
 });
 
 const gracefulShutdown = (signal) => {
