@@ -33,6 +33,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./public/index.html",
       filename: "index.html",
+      favicon: "./public/favicon.png",
     }),
     new webpack.DefinePlugin({
       "process.env.REACT_APP_API_URL": JSON.stringify(
