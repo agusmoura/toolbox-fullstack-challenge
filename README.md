@@ -14,12 +14,14 @@ A fullstack application with Node.js/Express backend API and React frontend. The
 ## Tech Stack
 
 ### Backend (api/)
+
 - Node.js 14.x
 - Express.js
 - Native HTTP client (no axios)
 - Mocha + Chai for testing
 
 ### Frontend (frontend/)
+
 - React 19
 - Redux Toolkit
 - React-Bootstrap
@@ -30,6 +32,7 @@ A fullstack application with Node.js/Express backend API and React frontend. The
 ## Quick Start
 
 ### Prerequisites
+
 - Node.js 14.x or higher
 - npm 6.x or higher
 - Docker (optional, for containerized deployment)
@@ -37,11 +40,14 @@ A fullstack application with Node.js/Express backend API and React frontend. The
 ### Local Development
 
 #### Option 1: Quick Start Script (Recommended)
+
 ```bash
 # From project root
 ./START_FULLSTACK.sh
 ```
+
 This script will:
+
 - Install dependencies if needed
 - Start backend on port 3000
 - Start frontend on port 3001
@@ -50,6 +56,7 @@ This script will:
 #### Option 2: Manual Start
 
 **Backend:**
+
 ```bash
 cd api
 npm install
@@ -59,6 +66,7 @@ npm run dev        # Development mode with auto-reload
 ```
 
 **Frontend:**
+
 ```bash
 cd frontend
 npm install
@@ -68,6 +76,7 @@ npm run dev
 ```
 
 **Testing:**
+
 ```bash
 # Backend tests
 cd api
@@ -115,6 +124,7 @@ Required environment variables for Docker:
 - `REACT_APP_API_TIMEOUT` - (Optional) API timeout in milliseconds (default: 10000)
 
 Example `.env` file (copy from `.env.production`):
+
 ```bash
 NODE_ENV=production
 PORT=3000
@@ -202,12 +212,15 @@ The Docker container uses a multi-stage build:
 ## API Endpoints
 
 ### GET /files/data
+
 Fetches and parses all CSV files from external API.
 
 **Query Parameters:**
+
 - `fileName` (optional) - Filter by specific filename
 
 **Response:**
+
 ```json
 [
   {
@@ -220,9 +233,11 @@ Fetches and parses all CSV files from external API.
 ```
 
 ### GET /files/list
+
 Returns list of available CSV files.
 
 **Response:**
+
 ```json
 {
   "files": ["test1.csv", "test2.csv", "test3.csv"]
@@ -230,6 +245,7 @@ Returns list of available CSV files.
 ```
 
 ### GET /health
+
 Health check endpoint (returns 200 OK).
 
 ## Project Structure
@@ -267,10 +283,12 @@ Health check endpoint (returns 200 OK).
 ### Frontend can't connect to backend
 
 **Development:**
+
 - Ensure backend is running on port 3000
 - Check webpack proxy configuration in `frontend/webpack.config.js`
 
 **Docker:**
+
 - Check if container is running: `docker ps`
 - Check logs: `docker logs fullstack-app`
 - Verify nginx proxy configuration in `nginx.conf`
@@ -282,14 +300,7 @@ This happens when webpack environment variables are not configured. Restart the 
 ### CSV validation failing
 
 Check the CSV format:
+
 - Must have exactly 4 columns
 - Number field must be a valid integer
 - Hex field must be exactly 32 characters of valid hex
-
-## License
-
-ISC
-
-## Support
-
-For issues and questions, please check the project documentation in `CLAUDE.md`.
