@@ -1,0 +1,75 @@
+/* Custom Header Styles */
+
+.custom-navbar {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  padding: 1rem 0;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.brand-icon {
+  transition: transform 0.3s ease;
+}
+
+.custom-navbar:hover .brand-icon {
+  transform: rotate(10deg) scale(1.05);
+}
+
+.brand-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.brand-subtitle {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #28a745;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .brand-title {
+    font-size: 1.25rem;
+  }
+
+  .brand-subtitle {
+    font-size: 0.65rem;
+  }
+
+  .brand-icon {
+    display: none;
+  }
+}
